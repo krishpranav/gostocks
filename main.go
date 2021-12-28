@@ -1,6 +1,19 @@
 package main
 
+import (
+	"fmt"
+	"os"
+	"path"
+	"sort"
+	"strings"
+	"time"
 
+	"github.com/krishpranav/gostocks/api"
+	"github.com/krishpranav/gostocks/graph"
+	"github.com/piquette/finance-go/datetime"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
+)
 
 var (
 	interval,
@@ -20,7 +33,22 @@ var (
 )
 
 func setDefaults() {
+	home, ok := os.LookupEnv("HOME")
+	if !ok {
+		panic("No HOME env var set")
+	}
+	configPath = fmt.Sprintf("%s/.config", home)
+	viper.AddConfigPath(configPath)
+	viper.SetConfigName("stonks.yml")
+	viper.SetConfigType("yaml")
+
+	viper.SetDefault("favourites", map[string]interface{}{})
 	
+	viper.SetDefault("config.standalone_height", 12)
+	viper.SetDefault("config.favourites_height", 12)
+	viper.SetDefault("config.default_theme", graph.LineTheme)
+
+	viper.ReadInConfig()
 }
 
 func main() {
