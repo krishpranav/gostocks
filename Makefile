@@ -1,11 +1,14 @@
 NAME := gostocks
 
 build:
-	go get
+	go mod tidy 
 	go build -v -o ${NAME}
 
 install:
 	go install -v
 
-clearn:
+clean:
+	rm gostocks
+
+clear:
 	rm -f ${GOPATH}/bin/gostocks
