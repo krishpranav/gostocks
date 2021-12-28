@@ -6,11 +6,9 @@ import (
 )
 
 func main() {
-	version := true
-
-	if version == true {
-		fmt.Println(version.Version)		
-		return
+	rootCmd := &cobra.Command {
+		Use: "gostocks",
+		Short: "A stock",
 	}
 	
 }
