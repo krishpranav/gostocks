@@ -1,9 +1,9 @@
 class Gostocks < Formula
-    homepage "https://github.com/krishpranav/gostocks"
-    url "https://github.com/krishpranav/gostocks.git"
+    url "https://github.com/krishpranav/gostocks/releases/download/v1/gostocks.tar"
+    sha256 "fb787e64a22a928ab1fbf89e3f18bdd9398994a4fe07ab8602508325886e49a4"
 
     def install
-        system "go mod tidy", "go build -o gostocks main.go"
+        
         puts "Installed successfully :)"
     end
 end
