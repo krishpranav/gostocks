@@ -1,13 +1,8 @@
 package main
 
-import "fmt"
-
-func version()  {
-	version := 1
-	
-	fmt.Println("current version: ", version)
-}
+import (
+	"github.com/krishpranav/gostocks/version"
+)
 
 func main() {
-	version()
 }
