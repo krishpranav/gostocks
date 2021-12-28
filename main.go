@@ -39,7 +39,7 @@ func setDefaults() {
 	}
 	configPath = fmt.Sprintf("%s/.config", home)
 	viper.AddConfigPath(configPath)
-	viper.SetConfigName("stonks.yml")
+	viper.SetConfigName("gostocks.yml")
 	viper.SetConfigType("yaml")
 
 	viper.SetDefault("favourites", map[string]interface{}{})
@@ -55,7 +55,7 @@ func setDefaults() {
 func main() {
 	setDefaults()
 	rootCmd := &cobra.Command{
-		Use:   "stonks",
+		Use:   "gostocks",
 		Short: "A stock visualizer",
 		Long:  "Displays realtime stocks in graph format in a terminal",
 		Run: func(cmd *cobra.Command, args []string) {
@@ -95,7 +95,7 @@ func main() {
 				favourites[strings.ReplaceAll(saveCmd, ".", "_")] = nameCmd
 				viper.Set("favourites", favourites)
 				if err := viper.WriteConfig(); err != nil {
-					err = viper.WriteConfigAs(path.Join(configPath, "stonks.yml"))
+					err = viper.WriteConfigAs(path.Join(configPath, "gostocks.yml"))
 					if err != nil {
 						fmt.Println(err.Error())
 						os.Exit(1)
@@ -133,7 +133,7 @@ func main() {
 					os.Exit(1)
 				}
 				if len(favourites) == 0 {
-					fmt.Println("No favourites added. You can add them in the format 'stonks -s AMD -n \"Advanced Micro Devices\"'")
+					fmt.Println("No favourites added. You can add them in the format 'gostocks -s AMD -n \"Advanced Micro Devices\"'")
 				}
 
 				keys := make([]string, 0, len(favourites))
@@ -170,16 +170,16 @@ func main() {
 			}
 		},
 	}
-	interval = rootCmd.PersistentFlags().StringP("interval", "i", "15m", "stonks -i X[m|h] (eg 15m, 5m, 1h, 1d)")
+	interval = rootCmd.PersistentFlags().StringP("interval", "i", "15m", "gostocks -i X[m|h] (eg 15m, 5m, 1h, 1d)")
 	year = rootCmd.PersistentFlags().BoolP("year", "y", false, "Display the last year (will set interval to 5d)")
 	ytd = rootCmd.PersistentFlags().Bool("ytd", false, "Display the year to date (will set interval to 5d)")
 	week = rootCmd.PersistentFlags().BoolP("week", "w", false, "Display the last week (will set interval to 1d)")
 	days = rootCmd.PersistentFlags().IntP("days", "d", 0, "24 hour period of stocks from X of days ago.")
 	theme = rootCmd.PersistentFlags().StringP("theme", "t", "", "Display theme for the chart (Options: \"line\", \"dot\", \"icon\")")
-	save = rootCmd.PersistentFlags().StringP("save", "s", "", "Add an item to the default stonks command. (Eg: -s AMD -n \"Advanced Micro Devices\")")
+	save = rootCmd.PersistentFlags().StringP("save", "s", "", "Add an item to the default gostocks command. (Eg: -s AMD -n \"Advanced Micro Devices\")")
 	remove = rootCmd.PersistentFlags().StringP("remove", "r", "", "Remove an item from favourites")
 	name = rootCmd.PersistentFlags().StringP("name", "n", "", "Optional name for a stonk save")
-	version = rootCmd.PersistentFlags().BoolP("version", "v", false, "stonks version")
+	version = rootCmd.PersistentFlags().BoolP("version", "v", false, "gostocks version")
 	extra = rootCmd.PersistentFlags().BoolP("extra", "e", false, "Include extra pre + post time. (Only works for day)")
 	width = rootCmd.PersistentFlags().IntP("width", "W", 80, "Base width of the graph")
 
