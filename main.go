@@ -1,14 +1,28 @@
 package main
 
-import (
-	"fmt"
-	"github.com/krishpranav/gostocks/version"
+
+
+var (
+	interval,
+	save,
+	remove,
+	name *string
+	year    *bool
+	ytd     *bool
+	week    *bool
+	version *bool
+	extra   *bool
+	width   *int
+	theme   *string
+	days    *int
+
+	configPath string
 )
 
-func main() {
-	rootCmd := &cobra.Command {
-		Use: "gostocks",
-		Short: "A stock",
-	}
+func setDefaults() {
 	
+}
+
+func main() {
+	setDefaults()
 }
