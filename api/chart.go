@@ -17,3 +17,10 @@ type Chart struct {
 	ChangeVal decimal.Decimal
 	Prev      decimal.Decimal
 }
+
+type Bar struct {
+	Timestamp *datetime.Datetime
+	Current   decimal.Decimal
+	Y         int
+	Char      string
+}
